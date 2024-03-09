@@ -31,7 +31,9 @@ function Signup() {
 
       if (response.ok) {
         // Signup successful, you can redirect or handle accordingly
+        const { token } = await response.json();
         console.log("Signup successful");
+        localStorage.setItem('token', token);
         navigate("/");
       } else {
         // Signup failed, handle the error

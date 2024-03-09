@@ -30,11 +30,11 @@ const LoginForm = () => {
       body: JSON.stringify(formData),
     });
     if (response.ok) {
-      // Signup successful, you can redirect or handle accordingly
+      const { token } = await response.json();
       console.log("Login successful");
+      localStorage.setItem('token', token);
       navigate("/");
     } else {
-      // Signup failed, handle the error
       console.error("Login failed");
       setErrmsg("Please Enter Correct Details");
     }
