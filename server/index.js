@@ -1,5 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const jwt=require("jsonwebtoken")
+const secretkey="secretkey"
 const cors = require("cors");
 const OrganizationModel = require("./models/organization");
 const app = express();
@@ -30,7 +32,9 @@ app.post("/login", async (req, res) => {
         if (password!==organization.password) {
             return res.status(401).json({ error: "Invalid email or password" });
         }
-        res.status(200).json({ message: "Login successful", organization });
+        jwt.sign({email,password},secretkey,(err,token)=>{
+            res.status(200).json({ message: "Login successful",token:token});
+        });
     } catch (error) {
         console.error("Error during login:", error);
         res.status(400).json({ error: error.message });
@@ -40,7 +44,10 @@ app.post('/register', async (req, res) => {
     try {
         const newOrganization = new OrganizationModel(req.body);
         await newOrganization.save();
-        res.status(201).json(newOrganization);
+        const formData=req.body;
+        jwt.sign({formData},secretkey,(err,token)=>{
+            res.status(201).json({ message: "Sigup successful",token:token});
+        });
     } catch (error) {
         console.error("Error during registration:", error);
         res.status(400).json({ error: error.message });
