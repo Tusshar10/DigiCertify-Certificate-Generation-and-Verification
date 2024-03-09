@@ -43,8 +43,8 @@ const LoginForm = () => {
 
     
     <div id="formFooter" className="d-flex justify-content-between">
-    <Link className="underlineHover" to="/">Forgot Password?</Link>
-      <Link className="underlineHover" to="/signup">New User?</Link>
+    <Link className="underlineHover" to="/" style={{textDecoration: 'none'}}>Forgot Password?</Link>
+      <Link className="underlineHover" to="/signup" style={{textDecoration: 'none'}}>New User?</Link>
     </div>
   </div>
 </div>
