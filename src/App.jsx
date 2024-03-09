@@ -9,12 +9,12 @@ function App() {
           <div style={{fontSize:"5vh",color:"#92badd",fontWeight:"bold"}}><i>DigiCertify</i></div>
         <div className="d-flex justify-content-end mt-2">
           <Link to="/login">
-          <button type="button" class="btn btn-primary" style={{"marginRight":"1vw"}}>
+          <button type="button" className="btn btn-primary" style={{"marginRight":"1vw"}}>
             Login
           </button>
           </Link>
           <Link to="/signup">
-          <button type="button" class="btn btn-primary">
+          <button type="button" className="btn btn-primary">
             Sign Up
           </button>
           </Link>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 
 function Signup() {
@@ -8,11 +8,39 @@ function Signup() {
   const [phoneNo, setPhoneNo] = useState("");
   const [gst, setGST] = useState("");
   const [password, setPassword] = useState("");
+  const [errmsg,setErrmsg]=useState("");
+  const navigate=useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log("Form submitted:", { organizationName, email, phoneNo, gst, password });
+    const formData = {
+      "name": organizationName,
+      "email": email,
+      "password": password,
+      "contact": phoneNo,
+      "gstno": gst,
+    };
+    try {
+      const response = await fetch("http://localhost:3001/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Signup successful, you can redirect or handle accordingly
+        console.log("Signup successful");
+        navigate("/");
+      } else {
+        // Signup failed, handle the error
+        console.error("Signup failed");
+        setErrmsg("Please Enter Correct Details")
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+    }
   };
 
   return (
@@ -77,6 +105,7 @@ function Signup() {
       </div>
       <button type="submit" className="btn btn-primary">Submit</button>
     </form>
+    <div style={{"color":"red",textAlign:"center"}}>{errmsg}</div>
     </>
   );
 }
