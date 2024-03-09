@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
+import Header from "../Header/Header";
 
 function Signup() {
   const [organizationName, setOrganizationName] = useState("");
