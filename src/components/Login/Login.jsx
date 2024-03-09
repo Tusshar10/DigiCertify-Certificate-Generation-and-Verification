@@ -1,7 +1,7 @@
 import { useState } from "react";
-import "./Login.css"; 
+import "./login.css"; 
 import { Link } from "react-router-dom";
-import Header from "../Header/Header";
+import Header from "../Header";
 
 const LoginForm = () => {
   const [username, setUser] = useState("");
