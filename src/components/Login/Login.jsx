@@ -43,6 +43,7 @@ const LoginForm = () => {
   return (
     <>
       <Header></Header>
+      <div className="loginpage">
       <div className="wrapper fadeInDown">
         <div id="formContent">
           <div className="fadeIn first mt-3">
@@ -97,6 +98,7 @@ const LoginForm = () => {
         </div>
       </div>
       <div style={{color:"red",textAlign:"center",fontSize:"3vh"}}>{errmsg}</div>
+      </div>
     </>
   );
 };

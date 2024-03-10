@@ -48,6 +48,7 @@ function Signup() {
   return (
     <>
     <Header></Header>
+    <div className="siguppage d-flex" style={{justifyContent:"space-between",alignItems:"center",flexDirection:"column"}}>
     <form onSubmit={handleSubmit}>
       <h1 style={{textAlign:"center"}}>Sign Up</h1>
       <div className="form-group">
@@ -95,7 +96,7 @@ function Signup() {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Password</label><br></br>
         <input
           type="password"
           className="form-control"
@@ -105,9 +106,12 @@ function Signup() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
+      <div className="d-flex justify-content-center">
       <button type="submit" className="btn btn-primary">Submit</button>
+      </div>
     </form>
     <div style={{"color":"red",textAlign:"center"}}>{errmsg}</div>
+    </div>
     </>
   );
 }
