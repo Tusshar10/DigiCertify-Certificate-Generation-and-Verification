@@ -15,7 +15,12 @@ function App() {
       setLoggedIn(false);
     }
   }, []);
-
+  const generate=()=>{
+    navigate("/generate")
+  }
+  const validation=()=>{
+    navigate("/validation")
+  }
   const handleLogout = () => {
     // Clear the token from localStorage on logout
     localStorage.removeItem("token");
@@ -63,11 +68,11 @@ function App() {
           </div>
         </div>
         <div className="main-content d-flex flex-column">
-          <button type="button" className="btn btn-primary btn-lg genbtn">
+          <button type="button" className="btn btn-primary btn-lg genbtn" onClick={generate}>
             Generate Certificate
           </button>
           <br></br>
-          <button type="button" className="btn btn-secondary btn-lg verbtn">
+          <button type="button" className="btn btn-secondary btn-lg verbtn" onClick={validation}>
             Validate Certificate
           </button>
         </div>

@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import Login from './components/Login/Login.jsx';
 import Signup from './components/SignUp.jsx';
+import Generation from './components/Generation/Generation.jsx';
+import Validation from './components/Validation/Validation.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup/>,
+  },
+  {
+    path: "/generate",
+    element: <Generation/>,
+  },
+  {
+    path: "/validation",
+    element: <Validation/>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(
