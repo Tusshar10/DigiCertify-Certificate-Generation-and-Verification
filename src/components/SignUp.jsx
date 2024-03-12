@@ -1,24 +1,24 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import "./Login/login.css";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
 
-function Signup() {
+const Sign = () => {
   const [organizationName, setOrganizationName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNo, setPhoneNo] = useState("");
   const [gst, setGST] = useState("");
   const [password, setPassword] = useState("");
-  const [errmsg,setErrmsg]=useState("");
-  const navigate=useNavigate();
-
-  const handleSubmit = async(e) => {
+  const [errmsg, setErrmsg] = useState("");
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
-      "name": organizationName,
-      "email": email,
-      "password": password,
-      "contact": phoneNo,
-      "gstno": gst,
+      name: organizationName,
+      email: email,
+      password: password,
+      contact: phoneNo,
+      gstno: gst,
     };
     try {
       const response = await fetch("http://localhost:3001/register", {
@@ -33,12 +33,12 @@ function Signup() {
         // Signup successful, you can redirect or handle accordingly
         const { token } = await response.json();
         console.log("Signup successful");
-        localStorage.setItem('token', token);
+        localStorage.setItem("token", token);
         navigate("/");
       } else {
         // Signup failed, handle the error
         console.error("Signup failed");
-        setErrmsg("Please Enter Correct Details")
+        setErrmsg("Please Enter Correct Details");
       }
     } catch (error) {
       console.error("Error during signup:", error);
@@ -47,73 +47,93 @@ function Signup() {
 
   return (
     <>
-    <Header></Header>
-    <div className="siguppage d-flex" style={{justifyContent:"space-between",alignItems:"center",flexDirection:"column"}}>
-    <form onSubmit={handleSubmit}>
-      <h1 style={{textAlign:"center"}}>Sign Up</h1>
-      <div className="form-group">
-        <label htmlFor="organization_name">Organization Name</label><br/>
-        <input
-          type="text"
-          className="form-control"
-          id="organization_name"
-          placeholder="Enter Name"
-          value={organizationName}
-          onChange={(e) => setOrganizationName(e.target.value)}
-        />
+      <Header></Header>
+      <div className="loginpage">
+        <div className="wrapper fadeInDown">
+          <div id="formContent">
+            <div className="fadeIn first mt-3">
+              <h3 style={{ textAlign: "center" }}>Sign Up</h3>
+            </div>
+
+            <form>
+              <input
+                type="text"
+                id="Organization Name"
+                className="fadeIn second"
+                onChange={(e) => setOrganizationName(e.target.value)}
+                value={organizationName}
+                name="Organization Name"
+                placeholder="Organization Name"
+              />
+              <input
+                type="text"
+                id="Email"
+                className="fadeIn third"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                name="Email"
+                placeholder="Email"
+              />
+              <input
+                type="number"
+                id="Contact"
+                className="fadeIn fourth"
+                onChange={(e) => setPhoneNo(e.target.value)}
+                value={phoneNo}
+                name="Contact"
+                placeholder="Contact"
+              />
+              <input
+                type="text"
+                id="gst"
+                className="fadeIn fifth"
+                onChange={(e) => setGST(e.target.value)}
+                value={gst}
+                name="gst"
+                placeholder="GST"
+              />
+              <input
+                type="password"
+                id="password"
+                className="fadeIn sixth"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                name="Password"
+                placeholder="Password"
+              />
+              <br></br>
+              <input
+                type="submit"
+                onClick={handleSubmit}
+                className="fadeIn seventh"
+                value="Log In"
+              />
+            </form>
+
+            <div id="formFooter" className="d-flex justify-content-between">
+              <Link
+                className="underlineHover"
+                to="/"
+                style={{ textDecoration: "none" }}
+              >
+                Forgot Password?
+              </Link>
+              <Link
+                className="underlineHover"
+                to="/signup"
+                style={{ textDecoration: "none" }}
+              >
+                New User?
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div style={{ color: "red", textAlign: "center", fontSize: "3vh" }}>
+          {errmsg}
+        </div>
       </div>
-      <div className="form-group">
-        <label htmlFor="email">Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          id="email"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="phoneno">Contact No</label>
-        <input
-          type="number"
-          className="form-control"
-          id="phoneno"
-          placeholder="Enter phone number "
-          value={phoneNo}
-          onChange={(e) => setPhoneNo(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="gst">GST No</label><br/>
-        <input
-          type="text"
-          className="form-control"
-          id="gst"
-          placeholder="Enter GST number "
-          value={gst}
-          onChange={(e) => setGST(e.target.value)}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="password">Password</label><br></br>
-        <input
-          type="password"
-          className="form-control"
-          id="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <div className="d-flex justify-content-center">
-      <button type="submit" className="btn btn-primary">Submit</button>
-      </div>
-    </form>
-    <div style={{"color":"red",textAlign:"center"}}>{errmsg}</div>
-    </div>
     </>
   );
-}
+};
 
-export default Signup;
+export default Sign;
