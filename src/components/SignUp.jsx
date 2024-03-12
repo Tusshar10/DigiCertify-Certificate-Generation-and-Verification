@@ -106,7 +106,7 @@ const Sign = () => {
                 type="submit"
                 onClick={handleSubmit}
                 className="fadeIn seventh"
-                value="Log In"
+                value="Sign Up"
               />
             </form>
 
