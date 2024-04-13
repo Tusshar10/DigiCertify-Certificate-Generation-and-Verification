@@ -13,7 +13,10 @@ app.use(cors());
 mongoose.connect("mongodb://127.0.0.1:27017/DigiCertify");
 
 const db = mongoose.connection;
-
+const contractAbi = require('../truffle/build/contracts/Certificate.json').abi;
+const contractAddress = '0xADfde7262EC1226Aa69d0d7CeB2381CD329BFb79';
+const web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:7545'));
+const contract = new web3.eth.Contract(contractAbi, contractAddress);
 db.on("error", (error) => {
     console.error("MongoDB connection error:", error);
     process.exit(1); // Terminate the application on connection error
@@ -57,19 +60,12 @@ app.post('/register', async (req, res) => {
 
 app.post('/addblock', async (req, res) => {
     try {
-        const contractAbi = require('../truffle/build/contracts/Certificate.json').abi;
-        const contractAddress = '0xd76FF6eca12698240c35E5e1dddf43a35B83471A';
-        const web3 = new Web3(new Web3.providers.HttpProvider('HTTP://127.0.0.1:7545'));
-        const contract = new web3.eth.Contract(contractAbi, contractAddress);
-
         const hash = req.body.hash;
-
         // Call a view or pure function
-        const result = await contract.methods.checkIpfsHash(hash).call();
-        console.log('Result:', result);
-
-        // Send a transaction to a function that modifies state
-        const transaction = await contract.methods.setIpfsHash(hash).send({ from: '0xE08f0562FcCe66a07FC5EDF081A7C45e06Ecdd9c'});
+        const accounts = await web3.eth.getAccounts();
+        const account = accounts[0]; // Use the first account for simplicity, you may choose a different account as needed
+        // Call the smart contract function to add the IPFS hash to the latest block
+        const transaction=await contract.methods.setIpfsHash(hash).send({ from: account,gas:3000000 });
 
         // Convert BigInt values to strings in the transaction object
         const transactionObject = {
@@ -93,8 +89,29 @@ app.post('/addblock', async (req, res) => {
         res.status(400).json({ success: false, error: error.message });
     }
 });
+app.get("/checkhash",async(req,res)=>{
+    try {
+        const hash = req.body.hash;
 
-
+        // Call the checkIpfsHash function of the contract
+        const isPresent = await contract.methods.checkIpfsHash(hash).call();
+        
+        res.status(200).json({ success: true, hash: hash, isPresent: isPresent });
+    } catch (error) {
+        console.error("Error checking IPFS hash:", error);
+        res.status(500).json({ success: false, error: "Error checking IPFS hash" });
+    }
+})
+app.get("/gethashes",async(req,res)=>{
+    try {
+        // Call the getAllIpfsHashes function of the contract
+        const allHashes = await contract.methods.getAllIpfsHashes().call();
+        res.status(200).json({ success: true, hashes: allHashes });
+    } catch (error) {
+        console.error("Error fetching IPFS hashes:", error);
+        res.status(500).json({ success: false, error: "Error fetching IPFS hashes" });
+    }
+})
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
 });

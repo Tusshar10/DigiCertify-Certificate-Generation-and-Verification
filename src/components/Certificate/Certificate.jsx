@@ -1,11 +1,16 @@
 import moment from 'moment'
 import styles from '../Generation/certificateGenerator.module.scss'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { useNavigate } from 'react-router-dom';
+
 
 const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signature, signatureDetails }) => {
   const certificateRef=useRef(null);
+  const navigate=useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const [modalMsg,setModalMsg]=useState("");
   const JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIzNzZiMWIxZC0yN2U3LTQyZjMtOTAyNy03MTc2YTUyMzc2NDMiLCJlbWFpbCI6InBuYXNpNzY3MEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiYmZjYjIxMmNlNWNhNjU4ZjgxZmMiLCJzY29wZWRLZXlTZWNyZXQiOiJjZDNhNGU0YTk2NWYwZTQ4YjE4NmNlZTIxY2I1NDBhZGRjN2MyN2Q4MWVlMGU2Zjk2MDk2MjczYjAxNzMwMmM2IiwiaWF0IjoxNzEyODM1MjE1fQ.f7VZ2ahpOUZjDgGxJQoTilDrxP4-o_jEMmIcOSSUiR8"
   const handleDownloadCertificate = async () => {
     html2canvas(certificateRef.current).then(canvas=>{
@@ -36,8 +41,21 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
     });
       const resData = await res.json();
       console.log(resData);
+      const response = await fetch("http://localhost:3001/addblock", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ hash: resData.IpfsHash }) // Assuming the response contains the IPFS hash
+        });
+        const responseData = await response.json();
+        setModalMsg("Certificate Id : "+resData.IpfsHash)
+        setShowModal("true")
+        console.log(responseData);
     } catch (error) {
       console.log(error);
+      alert("Error Occured");
+      navigate("/");
     }
   };
   return (
@@ -71,6 +89,22 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
       </div>
       <button style={{ marginTop: ' 3rem' }} onClick={handleDownloadCertificate}>Download PDF</button>
       <button  onClick={handleAddToIPFS}>Add to IPFS</button>
+      {/* Bootstrap modal */}
+      <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }}>
+        <div className="modal-dialog" role="document">
+      <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">Save this Id for future verification</h5>
+          </div>
+          <div className="modal-body">
+            {modalMsg}
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setShowModal(false)}>Close</button>
+          </div>
+        </div>
+      </div>
+      </div>
     </>
   )
 }
