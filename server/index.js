@@ -89,19 +89,18 @@ app.post('/addblock', async (req, res) => {
         res.status(400).json({ success: false, error: error.message });
     }
 });
-app.get("/checkhash",async(req,res)=>{
+app.get("/checkhash/:hash", async (req, res) => {
     try {
-        const hash = req.body.hash;
+        const hash = req.params.hash;
 
         // Call the checkIpfsHash function of the contract
         const isPresent = await contract.methods.checkIpfsHash(hash).call();
-        
         res.status(200).json({ success: true, hash: hash, isPresent: isPresent });
     } catch (error) {
         console.error("Error checking IPFS hash:", error);
         res.status(500).json({ success: false, error: "Error checking IPFS hash" });
     }
-})
+});
 app.get("/gethashes",async(req,res)=>{
     try {
         // Call the getAllIpfsHashes function of the contract
