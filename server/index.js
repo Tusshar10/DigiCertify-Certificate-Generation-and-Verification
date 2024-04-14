@@ -78,7 +78,7 @@ app.post('/addblock', async (req, res) => {
             gasUsed: transaction.gasUsed.toString(),
             status: transaction.status ? transaction.status.toString() : null,
         };
-        console.log(transactionObject)
+        //console.log(transactionObject)
         // Respond with success message and transaction details
         res.status(200).json({
             success: true,

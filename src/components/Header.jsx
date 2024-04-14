@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 function Header() {
   return (
-    <div style={{textAlign:"center",fontSize:"5vh",fontWeight:"bold"}}>
+    <div style={{textAlign:"center",fontSize:"5vh",fontWeight:"bolder"}}>
     <Link to="/" style={{textDecoration: 'none',color:"#92badd"}}><i>DigiCertify</i></Link>
     </div>
   )

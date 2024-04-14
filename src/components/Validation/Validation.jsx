@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../Header';
 function Validation() {
   const navigate=useNavigate();
   const [certificateId,setCertificateId]=useState("");
@@ -37,7 +38,8 @@ function Validation() {
     }
   }
   return (
-    <>
+    <div style={{backgroundColor:'#222222',height:'100vh'}}>
+    <Header></Header>
     <form onSubmit={handleSubmit}>
     <input type="text" name="certificateId" placeholder="Enter Certificate Id" value={certificateId} onChange={handleChange}></input>
     <input type="submit"></input>
@@ -45,7 +47,7 @@ function Validation() {
     <div style={{ color: "red", textAlign: "center", fontSize: "3vh" }}>
           {msg}
     </div>
-    </>
+    </div>
   )
 }
 

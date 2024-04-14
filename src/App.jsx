@@ -30,8 +30,8 @@ function App() {
   };
   return (
     <>
-      <div className="container d-flex flex-column">
-        <div className="d-flex justify-content-between">
+      <div className="container-fluid d-flex flex-column" style={{backgroundColor:'#222222',height:'100vh'}}>
+        <div className="d-flex justify-content-between mt-3">
           <div
             style={{ fontSize: "5vh", color: "#92badd", fontWeight: "bold" }}
           >

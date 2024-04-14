@@ -41,7 +41,9 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
     });
       const resData = await res.json();
       console.log(resData);
-      const response = await fetch("http://localhost:3001/addblock", {
+      if(!resData.isDuplicate)
+      {
+        const response = await fetch("http://localhost:3001/addblock", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -49,9 +51,10 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
             body: JSON.stringify({ hash: resData.IpfsHash }) // Assuming the response contains the IPFS hash
         });
         const responseData = await response.json();
+        console.log(responseData);
+      }
         setModalMsg("Certificate Id : "+resData.IpfsHash)
         setShowModal("true")
-        console.log(responseData);
     } catch (error) {
       console.log(error);
       alert("Error Occured");
