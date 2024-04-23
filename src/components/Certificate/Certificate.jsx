@@ -89,9 +89,12 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
             <span className={styles.smallText}>{signatureDetails}</span>
           </div>
         </div>
+        
       </div>
-      <button style={{ marginTop: ' 3rem' }} onClick={handleDownloadCertificate}>Download PDF</button>
-      <button  onClick={handleAddToIPFS}>Add to IPFS</button>
+      <div className={styles.buttondiv}>
+        <button style={{ marginTop: ' 3rem' }} onClick={handleDownloadCertificate}>Download PDF</button>
+        <button  onClick={handleAddToIPFS}>Add to IPFS</button>
+      </div>
       {/* Bootstrap modal */}
       <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }}>
         <div className="modal-dialog" role="document">

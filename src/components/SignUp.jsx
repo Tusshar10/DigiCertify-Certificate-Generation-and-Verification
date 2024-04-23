@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Login/login.css";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "./Header";
+import Header from "./header/Header";
 
 const Sign = () => {
   const [organizationName, setOrganizationName] = useState("");
@@ -128,7 +128,7 @@ const Sign = () => {
             </div>
           </div>
         </div>
-        <div style={{ color: "red", textAlign: "center", fontSize: "3vh" }}>
+        <div style={{ color: "red", textAlign: "center", fontSize: "2vh" }}>
           {errmsg}
         </div>
       </div>

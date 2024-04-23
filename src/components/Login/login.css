@@ -1,15 +1,19 @@
 
-/* BASIC */
-
 html {
-    background-color: #56baed;
+    background-color: black;
   }
   
   body {
     font-family: "Poppins", sans-serif;
     height: 100vh;
+    margin: 0px;
+    padding: 0px;
+    background-image: url('../../assets/shubham-dhage-IlUq1ruyv0Q-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center;
+    background-attachment: fixed;
   }
-  
   
   
   .loginpage h2 {

@@ -15,10 +15,10 @@ function App() {
       setLoggedIn(false);
     }
   }, []);
-  const generate=()=>{
+  const generate = () => {
     navigate("/generate")
   }
-  const validation=()=>{
+  const validation = () => {
     navigate("/validation")
   }
   const handleLogout = () => {
@@ -30,10 +30,11 @@ function App() {
   };
   return (
     <>
-      <div className="container-fluid d-flex flex-column" style={{backgroundColor:'#222222',height:'100vh'}}>
-        <div className="d-flex justify-content-between mt-3">
+
+      <div className="container d-flex flex-column">
+        <div className="d-flex justify-content-between">
           <div
-            style={{ fontSize: "5vh", color: "#92badd", fontWeight: "bold" }}
+            style={{ fontSize: "5vh", fontWeight: "bold" ,marginRight: "1vw" }}
           >
             <i>DigiCertify</i>
           </div>
@@ -52,17 +53,21 @@ function App() {
                 <Link to="/login">
                   <button
                     type="button"
-                    className="btn btn-primary"
-                    style={{ marginRight: "1vw" }}
+                    className="btn btn-primary login"
                   >
                     Login
                   </button>
                 </Link>
+
                 <Link to="/signup">
-                  <button type="button" className="btn btn-primary">
+                  <button
+                    type="button"
+                    className="btn btn-primary signup"
+                  >
                     Sign Up
                   </button>
                 </Link>
+
               </>
             )}
           </div>
@@ -76,7 +81,7 @@ function App() {
             Validate Certificate
           </button>
         </div>
-      </div>
+      </div >
     </>
   );
 }
