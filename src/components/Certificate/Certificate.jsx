@@ -42,8 +42,32 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
             <span className={styles.smallText}>{signatureDetails}</span>
           </div>
         </div>
+        
       </div>
+      <div className={styles.buttondiv}>
+        <button style={{ marginTop: ' 3rem' }} onClick={handleDownloadCertificate}>Download PDF</button>
+        <button  onClick={handleAddToIPFS}>Add to IPFS</button>
+      </div>
+<<<<<<< Updated upstream
       <button style={{ marginTop: ' 3rem' }} onClick={handleDownloadCertificate}>Download PDF</button>
+=======
+      {/* Bootstrap modal */}
+      <div className={`modal fade ${showModal ? 'show' : ''}`} style={{ display: showModal ? 'block' : 'none' }}>
+        <div className="modal-dialog" role="document">
+      <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLabel">Save this Id for future verification</h5>
+          </div>
+          <div className="modal-body">
+            {modalMsg}
+          </div>
+          <div className="modal-footer">
+            <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => setShowModal(false)}>Close</button>
+          </div>
+        </div>
+      </div>
+      </div>
+>>>>>>> Stashed changes
     </>
   )
 }

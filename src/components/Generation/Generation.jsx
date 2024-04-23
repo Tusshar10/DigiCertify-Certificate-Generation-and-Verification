@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useState } from 'react'
 
 import styles from './certificateGenerator.module.scss'
-import Header from '../Header'
+import Header from '../header/Header'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../Modal/Modal'
 import Certificate from '../Certificate/Certificate'

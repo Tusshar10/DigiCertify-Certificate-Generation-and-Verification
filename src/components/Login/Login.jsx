@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "../Header";
+import Header from "../header/Header";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
