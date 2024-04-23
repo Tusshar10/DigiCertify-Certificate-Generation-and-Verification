@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../Header';
 import Header from '../header/Header';
 import "./validation.scss"
 function Validation() {
