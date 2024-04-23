@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-<<<<<<< Updated upstream
-=======
+import Header from '../Header';
 import Header from '../header/Header';
 import "./validation.scss"
-
->>>>>>> Stashed changes
 function Validation() {
   const navigate=useNavigate();
+  const [certificateId,setCertificateId]=useState("");
+  const [msg,setMsg]=useState("")
   useEffect(() => {
     const token = localStorage.getItem("token");
   
@@ -17,10 +16,30 @@ function Validation() {
       navigate("/login");
     }
   }, []);
+  const handleChange=(e)=>{
+    setCertificateId(e.target.value)
+  }
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    try {
+      const response = await fetch(`http://localhost:3001/checkhash/${certificateId}`, {
+          method: "GET",
+          headers: {
+              "Content-Type": "application/json",
+          }
+      });
+      const data = await response.json();
+      if (data.success && data.isPresent) {
+        setMsg("Certificate is Verified");
+      } else {
+        setMsg("Certificate is fake");
+      } 
+    } catch (error) {
+      console.error("Error during verification:", error);
+      setMsg("Error during verification. Please try again later")
+    }
+  }
   return (
-<<<<<<< Updated upstream
-    <div>Validation</div>
-=======
     <div className="Validation">
     <Header></Header>
     <form onSubmit={handleSubmit}>
@@ -31,7 +50,6 @@ function Validation() {
           {msg}
     </div>
     </div>
->>>>>>> Stashed changes
   )
 }
 

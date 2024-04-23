@@ -30,13 +30,9 @@ function App() {
   };
   return (
     <>
-<<<<<<< Updated upstream
+
       <div className="container d-flex flex-column">
         <div className="d-flex justify-content-between">
-=======
-      <div className="container-fluid d-flex flex-column" style={{ height: '100vh' }}>
-        <div className="d-flex justify-content-between mt-3">
->>>>>>> Stashed changes
           <div
             style={{ fontSize: "5vh", fontWeight: "bold" ,marginRight: "1vw" }}
           >
