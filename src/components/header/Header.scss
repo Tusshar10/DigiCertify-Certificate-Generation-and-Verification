@@ -1,0 +1,22 @@
+
+.header-container {
+    text-align: center;
+    padding: 20px; 
+    position: sticky;
+    margin-right: 0.5 rem;
+  
+  }
+  
+  .header-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 3.5rem; 
+    font-weight: bold; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+    transition: color 0.3s ease; 
+  }
+  
+  
+  .header-link:hover {
+    color: #5ca4f6; 
+  }

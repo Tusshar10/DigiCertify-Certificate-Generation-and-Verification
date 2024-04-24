@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Login/login.css";
 import { Link, useNavigate } from "react-router-dom";
-import Header from "./Header";
+import Header from "./header/Header";
 
 const Sign = () => {
   const [organizationName, setOrganizationName] = useState("");
@@ -120,10 +120,10 @@ const Sign = () => {
               </Link>
               <Link
                 className="underlineHover"
-                to="/signup"
+                to="/login"
                 style={{ textDecoration: "none" }}
               >
-                New User?
+                Registered User?
               </Link>
             </div>
           </div>

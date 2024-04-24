@@ -26,24 +26,24 @@ db.once("open", () => {
     console.log("Connected to MongoDB");
 });
 
-app.post("/login", async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const organization = await OrganizationModel.findOne({ email });
-        if (!organization) {
-            return res.status(401).json({ error: "Invalid email or password" });
+    app.post("/login", async (req, res) => {
+        try {
+            const { email, password } = req.body;
+            const organization = await OrganizationModel.findOne({ email });
+            if (!organization) {
+                return res.status(401).json({ error: "Invalid email or password" });
+            }
+            if (password!==organization.password) {
+                return res.status(401).json({ error: "Invalid email or password" });
+            }
+            jwt.sign({email,password},secretkey,(err,token)=>{
+                res.status(200).json({ message: "Login successful",token:token});
+            });
+        } catch (error) {
+            console.error("Error during login:", error);
+            res.status(400).json({ error: error.message });
         }
-        if (password!==organization.password) {
-            return res.status(401).json({ error: "Invalid email or password" });
-        }
-        jwt.sign({email,password},secretkey,(err,token)=>{
-            res.status(200).json({ message: "Login successful",token:token});
-        });
-    } catch (error) {
-        console.error("Error during login:", error);
-        res.status(400).json({ error: error.message });
-    }
-});
+    });
 app.post('/register', async (req, res) => {
     try {
         const newOrganization = new OrganizationModel(req.body);
