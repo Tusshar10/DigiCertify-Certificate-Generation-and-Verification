@@ -54,8 +54,8 @@ function Generation() {
 
   return (
     <>
-      <div className={styles.wrapper} style={{paddingTop:"300px"}}>
-      <Header></Header>
+    <Header/>
+      <div className={styles.wrapper} style={{paddingTop:"30px"}}>
         <div className={styles.container} >
           <form onSubmit={handleSubmitForm}>
             <div className={styles.inputGroup}>

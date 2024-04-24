@@ -29,21 +29,18 @@ function App() {
     navigate("/login");
   };
   return (
-    <>
-
-      <div className="container d-flex flex-column">
-        <div className="d-flex justify-content-between">
-          <div
-            style={{ fontSize: "5vh", fontWeight: "bold" ,marginRight: "1vw" }}
-          >
+    <div>
+      <div style={{ backgroundColor: "#333", padding: "0.7rem", color: "white" }}>
+        <div className="container d-flex justify-content-between align-items-center">
+          <div style={{ fontSize: "2rem", fontWeight: "bold" }}>
             <i>DigiCertify</i>
           </div>
-          <div className="d-flex justify-content-end mt-2">
+          <div>
             {loggedIn ? (
               <button
                 type="button"
                 className="btn btn-danger"
-                style={{ marginRight: "1vw" }}
+                style={{ fontSize: "1.2rem", fontWeight: "bold", marginRight: "1vw" }}
                 onClick={handleLogout}
               >
                 Logout
@@ -54,6 +51,7 @@ function App() {
                   <button
                     type="button"
                     className="btn btn-primary login"
+                    style={{ fontSize: "1.2rem", fontWeight: "bold", marginRight: "1vw" }}
                   >
                     Login
                   </button>
@@ -63,26 +61,25 @@ function App() {
                   <button
                     type="button"
                     className="btn btn-primary signup"
+                    style={{ fontSize: "1.2rem", fontWeight: "bold", marginRight: "1vw" }}
                   >
                     Sign Up
                   </button>
                 </Link>
-
               </>
             )}
           </div>
         </div>
-        <div className="main-content d-flex flex-column">
-          <button type="button" className="btn btn-primary btn-lg genbtn" onClick={generate}>
-            Generate Certificate
-          </button>
-          <br></br>
-          <button type="button" className="btn btn-secondary btn-lg verbtn" onClick={validation}>
-            Validate Certificate
-          </button>
-        </div>
-      </div >
-    </>
+      </div>
+      <div className="container d-flex flex-column align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
+        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem',width:'35%'}} className="btn btn-primary btn-lg genbtn" onClick={generate}>
+          Generate Certificate
+        </button>
+        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem' ,width:'35%'}} className="btn btn-secondary btn-lg verbtn" onClick={validation}>
+          Validate Certificate
+        </button>
+      </div>
+    </div>
   );
 }
 

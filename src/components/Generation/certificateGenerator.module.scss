@@ -1,7 +1,7 @@
 .wrapper {
   background-color: #222222;
-  height: 100vh;
-  max-height: 100vh; 
+  height: 100%;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +36,7 @@
       width: 500px;
     }
   }
-  
+
   button {
     border: 2px solid #000;
     width: 100%;
@@ -61,12 +61,14 @@
   color: #000;
   width: 1000px;
   text-align: center;
+  overflow: auto;
 
   .certificateContainer {
     border: 10px solid #000;
     padding: 2rem;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
   }
 
   .smallText {
@@ -99,7 +101,7 @@
     }
   }
   button {
-    border: 2px solid #000;
+    border: 1px solid #000;
     width: 100%;
     outline: none;
     background-color: #e7e7e7;
@@ -114,10 +116,9 @@
     }
   }
 }
-.buttondiv
-{
+.buttondiv {
   button {
-    border: 2px solid #000;
+    border: 1px solid #000;
     width: 100%;
     outline: none;
     background-color: #e7e7e7;
@@ -132,3 +133,4 @@
     }
   }
 }
+

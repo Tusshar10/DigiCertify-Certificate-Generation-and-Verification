@@ -95,21 +95,28 @@
 
 /* Style for the generate certificate button */
 .genbtn {
-  background-color: #4caf50;
+  background-color: #4caf53;
   color: white;
+  border: none;
 }
 
 /* Style for the validate certificate button */
 .verbtn {
-  background-color: #f05252;
+  background-color: #c33241;
   color: white;
   margin-top: 1rem;
+  border: none;
 }
 
 .genbtn:hover {
-  background-color: #007bff;
+  background-color: #312ecc; /* Maintain original green color */
+  box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.2); /* Dark inset shadow */
+  transition: all 0.15s ease-in-out;
+  
 }
 
 .verbtn:hover {
-  background-color: #007bff;
+  background-color: #312ecc;; /* Maintain original red color */
+  box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.2); /* Dark inset shadow */
+  transition: all 0.15s ease-in-out
 }

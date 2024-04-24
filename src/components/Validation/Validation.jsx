@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../header/Header';
 import "./validation.scss"
+
 function Validation() {
   const navigate=useNavigate();
   const [certificateId,setCertificateId]=useState("");
@@ -40,14 +41,16 @@ function Validation() {
   }
   return (
     <div className="Validation">
-    <Header></Header>
-    <form onSubmit={handleSubmit}>
-    <input type="text" name="certificateId" placeholder="Enter Certificate Id" value={certificateId} onChange={handleChange}></input>
-    <input type="submit"></input>
-    </form>
-    <div className="message">
+      <Header />
+      <div style={{ marginTop: '2rem' }}>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="certificateId" placeholder="Enter Certificate Id" value={certificateId} onChange={handleChange} />
+          <input type="submit" />
+        </form>
+        <div className="message">
           {msg}
-    </div>
+        </div>
+      </div>
     </div>
   )
 }
