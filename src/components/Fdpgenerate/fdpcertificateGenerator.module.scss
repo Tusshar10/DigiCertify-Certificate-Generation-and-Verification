@@ -62,17 +62,13 @@
   width: 1000px;
   text-align: center;
   overflow: auto;
-  background-image: url('../../assets/image.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size:cover;
 
   .certificateContainer {
+    border: 10px solid #000;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    
   }
 
   .smallText {

@@ -111,13 +111,13 @@ const Sign = () => {
             </form>
 
             <div id="formFooter" className="d-flex justify-content-between">
-              <Link
+              {/* <Link
                 className="underlineHover"
                 to="/"
                 style={{ textDecoration: "none" }}
               >
                 Forgot Password?
-              </Link>
+              </Link> */}
               <Link
                 className="underlineHover"
                 to="/login"

@@ -1,5 +1,5 @@
 import moment from 'moment'
-import styles from '../Generation/certificateGenerator.module.scss'
+import styles from '../Fdpgenerate/fdpcertificateGenerator.module.scss'
 import { useRef, useState } from 'react'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
@@ -65,7 +65,7 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
     <>
       <div ref={certificateRef} className={styles.certificateWrapper}>
         <div className={styles.certificateContainer}>
-          {/* <div>Logo Here</div> */}
+          <div>Logo Here</div>
 
           <h1>CERTIFICATE OF APPRECIATION</h1>
 

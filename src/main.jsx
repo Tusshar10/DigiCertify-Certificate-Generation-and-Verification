@@ -10,6 +10,8 @@ import Login from './components/Login/Login.jsx';
 import Signup from './components/SignUp.jsx';
 import Generation from './components/Generation/Generation.jsx';
 import Validation from './components/Validation/Validation.jsx';
+import Events from './components/Events.jsx';
+import Fdpgeneration from './components/Fdpgenerate/Fdpgeneration.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,12 +26,20 @@ const router = createBrowserRouter([
     element: <Signup/>,
   },
   {
-    path: "/generate",
+    path: "/coursegenerate",
     element: <Generation/>,
+  },
+  {
+    path: "/fdpgenerate",
+    element: <Fdpgeneration/>,
   },
   {
     path: "/validation",
     element: <Validation/>,
+  },
+  {
+    path: "/events",
+    element: <Events/>,
   },
 ]);
 ReactDOM.createRoot(document.getElementById('root')).render(

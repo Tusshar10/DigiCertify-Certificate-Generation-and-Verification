@@ -16,7 +16,7 @@ function App() {
     }
   }, []);
   const generate = () => {
-    navigate("/generate")
+    navigate("/events")
   }
   const validation = () => {
     navigate("/validation")
