@@ -30,9 +30,10 @@ const LoginForm = () => {
       body: JSON.stringify(formData),
     });
     if (response.ok) {
-      const { token } = await response.json();
+      const { token,name} = await response.json();
       console.log("Login successful");
       localStorage.setItem('token', token);
+      localStorage.setItem("organizationname",name)
       navigate("/");
     } else {
       console.error("Login failed");

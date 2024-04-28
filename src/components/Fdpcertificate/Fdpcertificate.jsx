@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Certificate = ({ name, person_details,program, institute_name,dateOfConductStart, dateOfConductEnd, fdpsignature, fdpsignatureDetails,hodsignature, hodsignatureDetails }) => {
   const certificateRef=useRef(null);
+  const orgname = localStorage.getItem("organizationname");
   const navigate=useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalMsg,setModalMsg]=useState("");
@@ -66,8 +67,8 @@ const Certificate = ({ name, person_details,program, institute_name,dateOfConduc
       <div ref={certificateRef} className={styles.certificateWrapper}>
         <div className={styles.certificateContainer}>
           {/* <div>Logo Here</div> */}
-
-          <h1>CERTIFICATE OF APPRECIATION</h1>
+          <h1 className='m-3' style={{fontWeight: 'bold',fontStyle: 'italic'}}>{orgname}</h1>
+          <h2>CERTIFICATE OF APPRECIATION</h2>
 
           <span className={styles.smallText}>This certificate is proudly awarded to</span>
 

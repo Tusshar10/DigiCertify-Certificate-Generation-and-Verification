@@ -37,7 +37,7 @@ db.once("open", () => {
                 return res.status(401).json({ error: "Invalid email or password" });
             }
             jwt.sign({email,password},secretkey,(err,token)=>{
-                res.status(200).json({ message: "Login successful",token:token});
+                res.status(200).json({ message: "Login successful",token:token,name:organization.name});
             });
         } catch (error) {
             console.error("Error during login:", error);

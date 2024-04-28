@@ -34,6 +34,7 @@ const Sign = () => {
         const { token } = await response.json();
         console.log("Signup successful");
         localStorage.setItem("token", token);
+        localStorage.setItem("organizationname",organizationName)
         navigate("/");
       } else {
         // Signup failed, handle the error

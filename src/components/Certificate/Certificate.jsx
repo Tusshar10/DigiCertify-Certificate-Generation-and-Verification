@@ -1,12 +1,13 @@
 import moment from 'moment'
 import styles from '../Generation/certificateGenerator.module.scss'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
 
 
 const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signature, signatureDetails }) => {
+  const orgname = localStorage.getItem("organizationname");
   const certificateRef=useRef(null);
   const navigate=useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -66,8 +67,8 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
       <div ref={certificateRef} className={styles.certificateWrapper}>
         <div className={styles.certificateContainer}>
           {/* <div>Logo Here</div> */}
-
-          <h1>CERTIFICATE OF APPRECIATION</h1>
+          <h1 className='m-3' style={{fontWeight: 'bold',fontStyle: 'italic'}}>{orgname}</h1>
+          <h2>CERTIFICATE OF APPRECIATION</h2>
 
           <span className={styles.smallText}>This certificate is proudly awarded to</span>
 

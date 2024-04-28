@@ -80,14 +80,15 @@
 
   .primaryItalicText {
     color: #00f;
-    font-size: 3.5rem;
+    font-size: 3rem;
     font-weight: 700;
     font-style: italic;
     margin-block: 1rem; // margin-top & margin-bottom
   }
 
   .signatureBlock {
-    margin-top: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: space-around;
     .signatureImage {
@@ -101,7 +102,6 @@
       height: 1px;
       width: 200px;
       background-color: #000;
-      margin-bottom: 1rem;
     }
   }
   button {
