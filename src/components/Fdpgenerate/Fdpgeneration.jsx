@@ -8,11 +8,15 @@ import Certificate from '../Fdpcertificate/Fdpcertificate'
 
 const initialState = {
   name: 'Ayushi',
-  course: 'Data Structure and Algorithm',
+  person_details:'JIIT Noida',
+  program: 'Data Structure and Algorithm',
+  institute_name:'IIT Bombay',
   dateOfConductStart: '2020-05-20',
   dateOfConductEnd: '2023-05-20',
-  signature: '',
-  signatureDetails: 'CEO, CipherGuy',
+  fdpsignature: '',
+  fdpsignatureDetails: 'Coordinator',
+  hodsignature: '',
+  hodsignatureDetails: 'CSE Department',
 }
 
 const reducer = (state, action) => {
@@ -39,9 +43,9 @@ function Fdpgeneration() {
 
   const handleSubmitForm = e => {
     e.preventDefault()
-    const { name, course, dateOfConductStart, dateOfConductEnd, signature, signatureDetails } = formState
+    const { name, person_details,program, institute_name,dateOfConductStart, dateOfConductEnd, fdpsignature, fdpsignatureDetails,hodsignature, hodsignatureDetails } = formState
 
-    if (name && course && dateOfConductStart && dateOfConductEnd && signature && signatureDetails) {
+    if (name && person_details && program && institute_name && dateOfConductStart && dateOfConductEnd && fdpsignature && fdpsignatureDetails && hodsignature && hodsignatureDetails) {
       setIsOpenModal(true)
     } else {
       alert('Please fill all details')
@@ -62,10 +66,17 @@ function Fdpgeneration() {
               <label htmlFor='user-name'>Name</label>
               <input type='text' name='name' value={formState.name} onChange={handleTextChange} id='user-name' />
             </div>
-
             <div className={styles.inputGroup}>
-              <label htmlFor='course'>Course</label>
-              <input type='text' name='course' value={formState.course} onChange={handleTextChange} id='course' />
+              <label htmlFor='person_details'>Person Details</label>
+              <input type='text' name='person_details' value={formState.person_details} onChange={handleTextChange} id='person_details' />
+            </div>
+            <div className={styles.inputGroup}>
+              <label htmlFor='program'>Program Name</label>
+              <input type='text' name='program' value={formState.program} onChange={handleTextChange} id='program' />
+            </div>
+            <div className={styles.inputGroup}>
+              <label htmlFor='institute_name'>Organising Institute Name</label>
+              <input type='text' name='institute_name' value={formState.institute_name} onChange={handleTextChange} id='institute_name' />
             </div>
 
             <div className={styles.inputGroup}>
@@ -91,11 +102,11 @@ function Fdpgeneration() {
             </div>
 
             <div className={styles.inputGroup}>
-              <label htmlFor='signature'>Signature</label>
+              <label htmlFor='fdpsignature'>Signature of FDP Coordinator</label>
               <input
                 type='file'
-                name='signature'
-                id='signature'
+                name='fdpsignature'
+                id='fdpsignature'
                 onChange={e => {
                   const selected = e.target.files[0]
 
@@ -107,16 +118,41 @@ function Fdpgeneration() {
             </div>
 
             <div className={styles.inputGroup}>
-              <label htmlFor='signatureDetails'>Signature Details</label>
+              <label htmlFor='fdpsignatureDetails'>Details of FDP Coordinator</label>
               <input
                 type='text'
-                name='signatureDetails'
-                value={formState.signatureDetails}
+                name='fdpsignatureDetails'
+                value={formState.fdpsignatureDetails}
                 onChange={handleTextChange}
-                id='signatureDetails'
+                id='fdpsignatureDetails'
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <label htmlFor='hodsignature'>Signature of HOD</label>
+              <input
+                type='file'
+                name='hodsignature'
+                id='hodsignature'
+                onChange={e => {
+                  const selected = e.target.files[0]
+
+                  const objectUrl = URL.createObjectURL(selected)
+
+                  dispatch({ type: 'TEXT_CHANGE', field: e.target.name, payload: { ...selected, preview: objectUrl } })
+                }}
               />
             </div>
 
+            <div className={styles.inputGroup}>
+              <label htmlFor='hodsignatureDetails'>Details of HOD</label>
+              <input
+                type='text'
+                name='hodsignatureDetails'
+                value={formState.hodsignatureDetails}
+                onChange={handleTextChange}
+                id='hodsignatureDetails'
+              />
+            </div>
             <button type='submit'>Generate Certificate</button>
           </form>
         </div>

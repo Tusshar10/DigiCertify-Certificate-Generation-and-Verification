@@ -6,7 +6,7 @@ import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
 
 
-const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signature, signatureDetails }) => {
+const Certificate = ({ name, person_details,program, institute_name,dateOfConductStart, dateOfConductEnd, fdpsignature, fdpsignatureDetails,hodsignature, hodsignatureDetails }) => {
   const certificateRef=useRef(null);
   const navigate=useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -65,7 +65,7 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
     <>
       <div ref={certificateRef} className={styles.certificateWrapper}>
         <div className={styles.certificateContainer}>
-          <div>Logo Here</div>
+          {/* <div>Logo Here</div> */}
 
           <h1>CERTIFICATE OF APPRECIATION</h1>
 
@@ -73,20 +73,29 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
 
           <p className={styles.primaryItalicText}>{name}</p>
 
-          <span className={styles.smallText}>for successfully completing the course</span>
+          <span className={styles.smallText}>for successfully completing the faculty development program on</span>
 
-          <h2>{course}</h2>
-
+          <h2>{program}</h2>
+          <p>organised by {institute_name}</p>
           <span className={styles.smallText}>{`conducted from ${
             dateOfConductStart ? moment(dateOfConductStart).format('MMMM YYYY') : '-'
           } to ${dateOfConductEnd ? moment(dateOfConductEnd).format('MMMM YYYY') : '-'}`}</span>
 
           <div className={styles.signatureBlock}>
-            <img className={styles.signatureImage} src={signature.preview} alt='' />
+            <div className='d-flex-column'>
+            <img className={styles.signatureImage} src={fdpsignature.preview} alt='' />
 
             <span className={styles.horizontalBar} />
 
-            <span className={styles.smallText}>{signatureDetails}</span>
+            <span className={styles.smallText}>{fdpsignatureDetails}</span>
+            </div>
+            <div className='d-flex-column'>
+            <img className={styles.signatureImage} src={hodsignature.preview} alt='' />
+
+            <span className={styles.horizontalBar} />
+
+            <span className={styles.smallText}>{hodsignatureDetails}</span>
+            </div>
           </div>
         </div>
         

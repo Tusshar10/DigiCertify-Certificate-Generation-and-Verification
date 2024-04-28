@@ -8,6 +8,7 @@
   justify-content: center;
   color: #fff;
   overflow: auto;
+  
 
   .container {
     border: 1px solid #fff;
@@ -62,9 +63,11 @@
   width: 1000px;
   text-align: center;
   overflow: auto;
-
+  background-image: url('../../assets/image.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
   .certificateContainer {
-    border: 10px solid #000;
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -85,7 +88,8 @@
 
   .signatureBlock {
     margin-top: 3rem;
-    display: inline-block;
+    display: flex;
+    justify-content: space-around;
     .signatureImage {
       height: 100px;
       width: 150px;
