@@ -1,22 +1,20 @@
 import { useEffect, useReducer, useState } from 'react'
 
-import styles from './fdpcertificateGenerator.module.scss'
+import styles from './HackcertificateGenerator.module.scss'
 import Header from '../header/Header'
 import { useNavigate } from 'react-router-dom'
 import Modal from '../Modal/Modal'
-import Certificate from '../Fdpcertificate/Fdpcertificate'
+import Certificate from '../Hackcertificate/Hackcertificate'
 
 const initialState = {
   name: 'Ayushi',
   person_details:'JIIT Noida',
-  program: 'Data Structure and Algorithm',
+  Hackathon: 'RIDE',
+  teamname:'Coder-X',
+  position:'1st',
   institute_name:'IIT Bombay',
-  dateOfConductStart: '2020-05-20',
-  dateOfConductEnd: '2023-05-20',
-  fdpsignature: '',
-  fdpsignatureDetails: 'Coordinator',
-  hodsignature: '',
-  hodsignatureDetails: 'CSE Department',
+  hacksignature: '',
+  hacksignatureDetails: 'Coordinator',
 }
 
 const reducer = (state, action) => {
@@ -28,7 +26,7 @@ const reducer = (state, action) => {
       break
   }
 }
-function Fdpgeneration() {
+function Hackgeneration() {
   const navigate=useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -43,9 +41,9 @@ function Fdpgeneration() {
 
   const handleSubmitForm = e => {
     e.preventDefault()
-    const { name, person_details,program, institute_name,dateOfConductStart, dateOfConductEnd, fdpsignature, fdpsignatureDetails,hodsignature, hodsignatureDetails } = formState
+    const { name, person_details,Hackathon, position,teamname,institute_name,hacksignature, hacksignatureDetails} = formState
 
-    if (name && person_details && program && institute_name && dateOfConductStart && dateOfConductEnd && fdpsignature && fdpsignatureDetails && hodsignature && hodsignatureDetails) {
+    if (name && person_details && Hackathon && position && teamname && institute_name && hacksignature && hacksignatureDetails) {
       setIsOpenModal(true)
     } else {
       alert('Please fill all details')
@@ -67,19 +65,32 @@ function Fdpgeneration() {
               <input type='text' name='name' value={formState.name} onChange={handleTextChange} id='user-name' />
             </div>
             <div className={styles.inputGroup}>
-              <label htmlFor='person_details'>Person Designation</label>
+              <label htmlFor='person_details'>Participant's Institute Name</label>
               <input type='text' name='person_details' value={formState.person_details} onChange={handleTextChange} id='person_details' />
             </div>
             <div className={styles.inputGroup}>
-              <label htmlFor='program'>Program Name</label>
-              <input type='text' name='program' value={formState.program} onChange={handleTextChange} id='program' />
+              <label htmlFor='teamname'>Team Name</label>
+              <input type='text' name='teamname' value={formState.teamname} onChange={handleTextChange} id='teamname' />
             </div>
             <div className={styles.inputGroup}>
-              <label htmlFor='institute_name'>Organising Institute Name</label>
+              <label htmlFor='position'>Position Obtained</label>
+              <select name='position' value={formState.position} onChange={handleTextChange} id='position'>
+                <option value='1st'>1st</option>
+                <option value='2nd'>2nd</option>
+                <option value='3rd'>3rd</option>
+                <option value='Participant'>Participant</option>
+              </select>
+            </div>
+            <div className={styles.inputGroup}>
+              <label htmlFor='Hackathon'>Hackathon Name</label>
+              <input type='text' name='Hackathon' value={formState.Hackathon} onChange={handleTextChange} id='Hackathon' />
+            </div>
+            <div className={styles.inputGroup}>
+              <label htmlFor='institute_name'>Organiser's Name</label>
               <input type='text' name='institute_name' value={formState.institute_name} onChange={handleTextChange} id='institute_name' />
             </div>
 
-            <div className={styles.inputGroup}>
+            {/* <div className={styles.inputGroup}>
               <label htmlFor='dateOfConductStart'>Date of Conduct - Start</label>
               <input
                 type='date'
@@ -99,14 +110,14 @@ function Fdpgeneration() {
                 name='dateOfConductEnd'
                 id='dateOfConductEnd'
               />
-            </div>
+            </div> */}
 
             <div className={styles.inputGroup}>
-              <label htmlFor='fdpsignature'>Signature of FDP Coordinator</label>
+              <label htmlFor='hacksignature'>Signature of Hackathon Coordinator</label>
               <input
                 type='file'
-                name='fdpsignature'
-                id='fdpsignature'
+                name='hacksignature'
+                id='hacksignature'
                 onChange={e => {
                   const selected = e.target.files[0]
 
@@ -118,39 +129,13 @@ function Fdpgeneration() {
             </div>
 
             <div className={styles.inputGroup}>
-              <label htmlFor='fdpsignatureDetails'>Details of FDP Coordinator</label>
+              <label htmlFor='hacksignatureDetails'>Details of Hackathon Coordinator</label>
               <input
                 type='text'
-                name='fdpsignatureDetails'
-                value={formState.fdpsignatureDetails}
+                name='hacksignatureDetails'
+                value={formState.hacksignatureDetails}
                 onChange={handleTextChange}
-                id='fdpsignatureDetails'
-              />
-            </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor='hodsignature'>Signature of HOD</label>
-              <input
-                type='file'
-                name='hodsignature'
-                id='hodsignature'
-                onChange={e => {
-                  const selected = e.target.files[0]
-
-                  const objectUrl = URL.createObjectURL(selected)
-
-                  dispatch({ type: 'TEXT_CHANGE', field: e.target.name, payload: { ...selected, preview: objectUrl } })
-                }}
-              />
-            </div>
-
-            <div className={styles.inputGroup}>
-              <label htmlFor='hodsignatureDetails'>Details of HOD</label>
-              <input
-                type='text'
-                name='hodsignatureDetails'
-                value={formState.hodsignatureDetails}
-                onChange={handleTextChange}
-                id='hodsignatureDetails'
+                id='hacksignatureDetails'
               />
             </div>
             <button type='submit'>Generate Certificate</button>
@@ -164,4 +149,4 @@ function Fdpgeneration() {
   )
 }
 
-export default Fdpgeneration
+export default Hackgeneration

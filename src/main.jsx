@@ -12,6 +12,7 @@ import Generation from './components/Generation/Generation.jsx';
 import Validation from './components/Validation/Validation.jsx';
 import Events from './components/Events.jsx';
 import Fdpgeneration from './components/Fdpgenerate/Fdpgeneration.jsx';
+import Hackgeneration from './components/Hackgenerate/Hackgeneration.jsx';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/fdpgenerate",
     element: <Fdpgeneration/>,
+  },
+  {
+    path: "/hackgenerate",
+    element: <Hackgeneration/>,
   },
   {
     path: "/validation",

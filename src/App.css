@@ -108,15 +108,4 @@
   border: none;
 }
 
-.genbtn:hover {
-  background-color: #312ecc; /* Maintain original green color */
-  box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.2); /* Dark inset shadow */
-  transition: all 0.15s ease-in-out;
-  
-}
 
-.verbtn:hover {
-  background-color: #312ecc;; /* Maintain original red color */
-  box-shadow: inset 0px 3px 8px rgba(0, 0, 0, 0.2); /* Dark inset shadow */
-  transition: all 0.15s ease-in-out
-}

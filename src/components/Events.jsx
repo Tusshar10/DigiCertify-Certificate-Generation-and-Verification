@@ -10,6 +10,9 @@ export default function Events() {
   const fdp = () => {
     navigate("/fdpgenerate")
   }
+  const hack = () => {
+    navigate("/hackgenerate")
+  }
   return (
     <>
       <Header></Header>
@@ -18,11 +21,14 @@ export default function Events() {
       <h1 style={{color:"white"}}>Select type of Certificate</h1>
       </div>
       <div className='d-flex justify-content-center'>
-      <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem',width:'35%'}} className="btn btn-primary btn-lg genbtn" onClick={course}>
+      <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem',width:'35%'}} className="btn btn-primary btn-lg" onClick={course}>
           Course Certificate
         </button>
-        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem' ,width:'35%'}} className="btn btn-secondary btn-lg verbtn" onClick={fdp}>
+        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem' ,width:'35%'}} className="btn btn-primary btn-lg" onClick={fdp}>
           FDP Certificate
+        </button>
+        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem' ,width:'35%'}} className="btn btn-primary btn-lg" onClick={hack}>
+          Hackathon
         </button>
         </div>
         </div>

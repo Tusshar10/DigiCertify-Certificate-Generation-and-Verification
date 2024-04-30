@@ -72,10 +72,10 @@ function App() {
         </div>
       </div>
       <div className="container d-flex flex-column align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
-        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem',width:'35%'}} className="btn btn-primary btn-lg genbtn" onClick={generate}>
+        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem',width:'35%'}} className="btn btn-success btn-lg" onClick={generate}>
           Generate Certificate
         </button>
-        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem' ,width:'35%'}} className="btn btn-secondary btn-lg verbtn" onClick={validation}>
+        <button type="button" style={{ fontSize: '2rem', padding: '1rem 1rem', margin: '1rem' ,width:'35%'}} className="btn btn-primary btn-lg" onClick={validation}>
           Validate Certificate
         </button>
       </div>
