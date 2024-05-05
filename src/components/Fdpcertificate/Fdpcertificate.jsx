@@ -1,6 +1,6 @@
 import moment from 'moment'
 import styles from '../Fdpgenerate/fdpcertificateGenerator.module.scss'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,27 @@ const Certificate = ({ name, person_details,program, institute_name,dateOfConduc
   const navigate=useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [modalMsg,setModalMsg]=useState("");
+  const [certificateId,setCertificateId]=useState("")
   const JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIzNzZiMWIxZC0yN2U3LTQyZjMtOTAyNy03MTc2YTUyMzc2NDMiLCJlbWFpbCI6InBuYXNpNzY3MEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiYmZjYjIxMmNlNWNhNjU4ZjgxZmMiLCJzY29wZWRLZXlTZWNyZXQiOiJjZDNhNGU0YTk2NWYwZTQ4YjE4NmNlZTIxY2I1NDBhZGRjN2MyN2Q4MWVlMGU2Zjk2MDk2MjczYjAxNzMwMmM2IiwiaWF0IjoxNzEyODM1MjE1fQ.f7VZ2ahpOUZjDgGxJQoTilDrxP4-o_jEMmIcOSSUiR8"
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            // Make a GET request to fetch the certificate number
+            const response = await fetch(`http://localhost:3001/getcertno/${orgname}/FDP`); // Replace orgname and type with actual values
+            if (!response.ok) {
+                throw new Error("Failed to fetch certificate number");
+            }
+            const data = await response.json();
+            // Assuming the response contains a property called certificateNumber with the certificate number
+            var cnt=parseInt(data.count)+1;
+            setCertificateId(name.substring(0,3)+'_'+orgname.substring(0,3)+'_FDP_'+cnt.toString());
+        } catch (error) {
+            console.error("Error fetching certificate number:", error);
+            // Handle error
+        }
+    };
+        fetchData();
+  }, []);
   const handleDownloadCertificate = async () => {
     html2canvas(certificateRef.current).then(canvas=>{
       const imgData=canvas.toDataURL('image/png');
@@ -53,6 +73,13 @@ const Certificate = ({ name, person_details,program, institute_name,dateOfConduc
         });
         const responseData = await response.json();
         console.log(responseData);
+        const res = await fetch("http://localhost:3001/addcertno", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({name:orgname,certificateType:"FDP",certificateId:certificateId}) 
+        });
       }
         setModalMsg("Certificate Id : "+resData.IpfsHash)
         setShowModal("true")
@@ -66,8 +93,8 @@ const Certificate = ({ name, person_details,program, institute_name,dateOfConduc
     <>
       <div ref={certificateRef} className={styles.certificateWrapper}>
         <div className={styles.certificateContainer}>
-          {/* <div>Logo Here</div> */}
-          <h1 className='m-3' style={{fontWeight: 'bold',fontStyle: 'italic'}}>{orgname}</h1>
+          <div className="mt-3"style={{ textAlign: "right" }}>Certificate Id: {certificateId}</div>
+          <h1 className='mt-2' style={{fontWeight: 'bold',fontStyle: 'italic'}}>{orgname}</h1>
           <h2>CERTIFICATE OF APPRECIATION</h2>
 
           <span className={styles.smallText}>This certificate is proudly awarded to</span>

@@ -4,6 +4,7 @@ const jwt=require("jsonwebtoken")
 const secretkey="secretkey"
 const cors = require("cors");
 const OrganizationModel = require("./models/organization");
+const CertificateModel=require("./models/certificate")
 const app = express();
 const { Web3 } = require('web3');
 
@@ -111,6 +112,42 @@ app.get("/gethashes",async(req,res)=>{
         res.status(500).json({ success: false, error: "Error fetching IPFS hashes" });
     }
 })
+app.get("/getcertno/:orgname/:type", async (req, res) => {
+    try {
+        const { orgname, type } = req.params;
+
+        // Query the database to count the number of records matching orgname and type
+        const count = await CertificateModel.countDocuments({ 
+            name: orgname, 
+            certificateType: type 
+        });
+
+        res.status(200).json({ success: true, count });
+    } catch (error) {
+        console.error("Error fetching Certificates:", error);
+        res.status(500).json({ success: false, error: "Error fetching Certificates" });
+    }
+});
+app.post("/addcertno", async (req, res) => {
+    try {
+        // Extract fields values from the request body
+        const { name, certificateType, certificateId } = req.body;
+        // Create a new certificate document
+        const newCertificate = new CertificateModel({
+            name,
+            certificateType,
+            certificateId
+        });
+
+        // Save the new certificate document to the database
+        await newCertificate.save();
+
+        res.status(201).json({ success: true, message: "Certificate added successfully" });
+    } catch (error) {
+        console.error("Error adding Certificate:", error);
+        res.status(500).json({ success: false, error: "Error adding Certificate" });
+    }
+});
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
 });
