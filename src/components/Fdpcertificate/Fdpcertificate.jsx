@@ -13,6 +13,7 @@ const Certificate = ({ name, person_details,program, institute_name,dateOfConduc
   const [showModal, setShowModal] = useState(false);
   const [modalMsg,setModalMsg]=useState("");
   const [certificateId,setCertificateId]=useState("")
+  const sname=name.substring(0,3);
   const JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIzNzZiMWIxZC0yN2U3LTQyZjMtOTAyNy03MTc2YTUyMzc2NDMiLCJlbWFpbCI6InBuYXNpNzY3MEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiYmZjYjIxMmNlNWNhNjU4ZjgxZmMiLCJzY29wZWRLZXlTZWNyZXQiOiJjZDNhNGU0YTk2NWYwZTQ4YjE4NmNlZTIxY2I1NDBhZGRjN2MyN2Q4MWVlMGU2Zjk2MDk2MjczYjAxNzMwMmM2IiwiaWF0IjoxNzEyODM1MjE1fQ.f7VZ2ahpOUZjDgGxJQoTilDrxP4-o_jEMmIcOSSUiR8"
   useEffect(() => {
     const fetchData = async () => {
@@ -25,14 +26,14 @@ const Certificate = ({ name, person_details,program, institute_name,dateOfConduc
             const data = await response.json();
             // Assuming the response contains a property called certificateNumber with the certificate number
             var cnt=parseInt(data.count)+1;
-            setCertificateId(name.substring(0,3)+'_'+orgname.substring(0,3)+'_FDP_'+cnt.toString());
+            setCertificateId(sname+'_'+orgname.substring(0,3)+'_FDP_'+cnt.toString());
         } catch (error) {
             console.error("Error fetching certificate number:", error);
             // Handle error
         }
     };
         fetchData();
-  }, []);
+  });
   const handleDownloadCertificate = async () => {
     html2canvas(certificateRef.current).then(canvas=>{
       const imgData=canvas.toDataURL('image/png');

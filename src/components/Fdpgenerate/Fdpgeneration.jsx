@@ -66,10 +66,10 @@ function Fdpgeneration() {
               <label htmlFor='user-name'>Name</label>
               <input type='text' name='name' value={formState.name} onChange={handleTextChange} id='user-name' />
             </div>
-            <div className={styles.inputGroup}>
+            {/* <div className={styles.inputGroup}>
               <label htmlFor='person_details'>Person Designation</label>
               <input type='text' name='person_details' value={formState.person_details} onChange={handleTextChange} id='person_details' />
-            </div>
+            </div> */}
             <div className={styles.inputGroup}>
               <label htmlFor='program'>Program Name</label>
               <input type='text' name='program' value={formState.program} onChange={handleTextChange} id='program' />
