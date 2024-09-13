@@ -7,7 +7,6 @@ This project aims to develop a secure and decentralized certificate generation a
 - [Use Case Diagram](#use-case-diagram)
 - [Workflow](#workflow)
 - [Technologies Used](#technologies-used)
-- [Screenshots](#screenshots)
 - [Implementation Details](#implementation-details)
   - [Login Page](#login-page)
   - [Signup Page](#signup-page)
@@ -19,7 +18,6 @@ This project aims to develop a secure and decentralized certificate generation a
   - [Validation Page](#validation-page)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 - **Secure Certificate Generation:** Users can generate certificates with unique details such as name, email, GST number, and contact info.
@@ -128,6 +126,3 @@ Contributions are welcome! If you want to contribute to this project, please fol
 3. Make your changes and test them thoroughly.
 4. Submit a pull request with a detailed description of your changes.
 
-## License
-
-Information about the project’s license.
