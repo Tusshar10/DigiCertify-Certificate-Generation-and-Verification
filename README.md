@@ -82,7 +82,8 @@ Users have the flexibility to select from a range of provided templates and gene
 
 Organizations can fill in these details to generate the certificate and download it in PDF format.
 
-![Certificate Details](https://github.com/user-attachments/assets/dbc83106-cbcc-4259-8782-333c1cec15d5)
+![image](https://github.com/user-attachments/assets/eb6578a3-e0ea-46e8-a47d-dc227527a494)
+
 
 ### Certificate Preview
 
