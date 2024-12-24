@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
+import { generateTimeRandomId } from '../../generateId';
 
 const Certificate = ({ name, person_details,Hackathon, position,teamname,institute_name,hacksignature, hacksignatureDetails}) => {
   const certificateRef=useRef(null);
@@ -25,14 +26,15 @@ const Certificate = ({ name, person_details,Hackathon, position,teamname,institu
                 const data = await response.json();
                 // Assuming the response contains a property called certificateNumber with the certificate number
                 var cnt=parseInt(data.count)+1;
-                setCertificateId(sname+"_"+orgname.substring(0,3)+'_HACK_'+cnt.toString());
+                const Id= generateTimeRandomId(sname,orgname,cnt,"HACK")
+                setCertificateId(Id);
             } catch (error) {
                 console.error("Error fetching certificate number:", error);
                 // Handle error
             }
         };
         fetchData();
-    });
+    },[sname,orgname]);
   const handleDownloadCertificate = async () => {
     html2canvas(certificateRef.current).then(canvas=>{
       const imgData=canvas.toDataURL('image/png');

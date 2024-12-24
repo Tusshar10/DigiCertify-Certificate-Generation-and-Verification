@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { useNavigate } from 'react-router-dom';
-
+import { generateTimeRandomId } from '../../generateId';
 
 const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signature, signatureDetails }) => {
   const orgname = localStorage.getItem("organizationname");
@@ -16,24 +16,25 @@ const Certificate = ({ name, course, dateOfConductStart, dateOfConductEnd, signa
   const sname=name.substring(0,3);
   const JWT="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySW5mb3JtYXRpb24iOnsiaWQiOiIzNzZiMWIxZC0yN2U3LTQyZjMtOTAyNy03MTc2YTUyMzc2NDMiLCJlbWFpbCI6InBuYXNpNzY3MEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwicGluX3BvbGljeSI6eyJyZWdpb25zIjpbeyJpZCI6IkZSQTEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX0seyJpZCI6Ik5ZQzEiLCJkZXNpcmVkUmVwbGljYXRpb25Db3VudCI6MX1dLCJ2ZXJzaW9uIjoxfSwibWZhX2VuYWJsZWQiOmZhbHNlLCJzdGF0dXMiOiJBQ1RJVkUifSwiYXV0aGVudGljYXRpb25UeXBlIjoic2NvcGVkS2V5Iiwic2NvcGVkS2V5S2V5IjoiYmZjYjIxMmNlNWNhNjU4ZjgxZmMiLCJzY29wZWRLZXlTZWNyZXQiOiJjZDNhNGU0YTk2NWYwZTQ4YjE4NmNlZTIxY2I1NDBhZGRjN2MyN2Q4MWVlMGU2Zjk2MDk2MjczYjAxNzMwMmM2IiwiaWF0IjoxNzEyODM1MjE1fQ.f7VZ2ahpOUZjDgGxJQoTilDrxP4-o_jEMmIcOSSUiR8"
   useEffect(() => {
-    const fetchData = async () => {
-        try {
-            // Make a GET request to fetch the certificate number
-            const response = await fetch(`http://localhost:3001/getcertno/${orgname}/COU`); // Replace orgname and type with actual values
-            if (!response.ok) {
-                throw new Error("Failed to fetch certificate number");
-            }
-            const data = await response.json();
-            // Assuming the response contains a property called certificateNumber with the certificate number
-            var cnt=parseInt(data.count)+1;
-            setCertificateId(sname+"_"+orgname.substring(0,3)+'_COU_'+cnt.toString());
-        } catch (error) {
-            console.error("Error fetching certificate number:", error);
-            // Handle error
-        }
-    };
-        fetchData();
-    });
+          const fetchData = async () => {
+              try {
+                  // Make a GET request to fetch the certificate number
+                  const response = await fetch(`http://localhost:3001/getcertno/${orgname}/COU`); // Replace orgname and type with actual values
+                  if (!response.ok) {
+                      throw new Error("Failed to fetch certificate number");
+                  }
+                  const data = await response.json();
+                  // Assuming the response contains a property called certificateNumber with the certificate number
+                  var cnt=parseInt(data.count)+1;
+                  const Id= generateTimeRandomId(sname,orgname,cnt,"COU")
+                  setCertificateId(Id);
+              } catch (error) {
+                  console.error("Error fetching certificate number:", error);
+                  // Handle error
+              }
+          };
+          fetchData();
+      },[sname,orgname]);
   const handleDownloadCertificate = async () => {
     html2canvas(certificateRef.current).then(canvas=>{
       const imgData=canvas.toDataURL('image/png');
