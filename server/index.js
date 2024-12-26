@@ -148,6 +148,48 @@ app.post("/addcertno", async (req, res) => {
         res.status(500).json({ success: false, error: "Error adding Certificate" });
     }
 });
+app.get('/getCertificateDetails/:certificateId', async (req, res) => {
+    const { certificateId } = req.params; 
+
+    try {
+        const certificate = await CertificateModel.findOne({ certificateId });
+        if (certificate) {
+            var type="";
+            if(certificate.certificateType=='COU')
+            {
+                type="Course"
+            }
+            else if(certificate.certificateType=='HACK')
+            {
+                type='Hackathon'
+            }
+            else
+            {
+                type='Faculty Development Programme'
+            }
+            res.json({
+                success: true,
+                details: {
+                    organization: certificate.name, 
+                    type,
+                },
+            });
+        } else {
+            res.json({
+                success: false,
+                message: "Certificate not found",
+            });
+        }
+    } catch (error) {
+        console.error("Error fetching certificate details:", error);
+        res.status(500).json({
+            success: false,
+            message: "Server error. Please try again later.",
+        });
+    }
+});
+
+
 app.listen(3001, () => {
     console.log("Server is running on port 3001");
 });
