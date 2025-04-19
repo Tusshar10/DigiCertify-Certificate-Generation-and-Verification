@@ -7,7 +7,14 @@ const OrganizationModel = require("./models/organization");
 const CertificateModel=require("./models/certificate")
 const app = express();
 const { Web3 } = require('web3');
-
+const redis=require("redis");
+const client= redis.createClient();
+client.connect().then(()=>{
+    console.log("Redis client connected");
+})
+.catch((err)=>{
+    console.log(err)
+});
 app.use(express.json());
 app.use(cors());
 
@@ -152,6 +159,12 @@ app.get('/getCertificateDetails/:certificateId', async (req, res) => {
     const { certificateId } = req.params; 
 
     try {
+        const data=await client.get(`certificate:${certificateId}`);
+        if(data)
+            return res.json({
+                success:true,
+                details:JSON.parse(data)
+            })
         const certificate = await CertificateModel.findOne({ certificateId });
         if (certificate) {
             var type="";
@@ -167,6 +180,10 @@ app.get('/getCertificateDetails/:certificateId', async (req, res) => {
             {
                 type='Faculty Development Programme'
             }
+            await client.set(`certificate:${certificateId}`,JSON.stringify({
+                organization: certificate.name, 
+                type
+            }),{EX:600});
             res.json({
                 success: true,
                 details: {

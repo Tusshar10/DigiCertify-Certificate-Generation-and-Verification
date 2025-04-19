@@ -67,6 +67,7 @@ function Validation() {
         },
       });
       const data = await response.json();
+      console.log(data)
       if (data.success && data.details) {
         setCertificateDetails(data.details); // Update the state with fetched details
       } else {
@@ -108,10 +109,10 @@ function Validation() {
         {certificateDetails && (
           <div className={`certificate-details ${animationClass}`}>
           <h3>Certificate Details</h3>
-          <p><span class="detail-label">Name:</span> John Doe</p>
-          <p><span class="detail-label">Organization:</span> {certificateDetails.organization}</p>
-          <p><span class="detail-label">Type:</span> {certificateDetails.type}</p>
-          <p><span class="detail-label">Issued Date:</span> 2023-12-24</p>
+          <p><span className="detail-label">Name:</span> John Doe</p>
+          <p><span className="detail-label">Organization:</span> {certificateDetails.organization}</p>
+          <p><span className="detail-label">Type:</span> {certificateDetails.type}</p>
+          <p><span className="detail-label">Issued Date:</span> 2023-12-24</p>
           </div>
         )}
       </div>
